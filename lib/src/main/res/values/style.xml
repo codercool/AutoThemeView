@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ThemeTextView">
+        <attr name="theme_textDarkColor" format="color"/>
+        <attr name="theme_backgroundColor" format="color"/>
+        <attr name="theme_backgroundDarkColor" format="color"/>
+    </declare-styleable>
+</resources>
