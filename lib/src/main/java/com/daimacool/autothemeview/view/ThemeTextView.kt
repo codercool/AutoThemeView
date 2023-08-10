@@ -2,16 +2,29 @@ package com.daimacool.autothemeview.view
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
+import android.util.Log
+import android.view.View
+import com.daimacool.autothemeview.AutoThemeManager
 import com.daimacool.autothemeview.R
 
 class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
 
-    private var textNightColor: ColorStateList? = null
+    private var textDarkColor: ColorStateList? = null
 
     private var lightTextColor: ColorStateList? = null
 
-    private var initialized = false
+    private var lightColorBackGround:Drawable? = null
+
+    private var darkColorBackGround:Drawable? = null
+
+    private var lightBGColor:ColorStateList? = null
+
+    private var darBGColor:ColorStateList? = null
+
+    private var currentIsDarkModel = false
 
     constructor(context: Context) : this(context, null)
 
@@ -21,7 +34,8 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
         android.R.attr.textViewStyle
     )
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int
+    ) : super(
         context,
         attrs,
         defStyleAttr
@@ -29,13 +43,22 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
         val typedArray =
             context.theme.obtainStyledAttributes(attrs, R.styleable.ThemeTextView, defStyleAttr, 0)
         for (i in 0 until typedArray.indexCount) {
-            val index = typedArray.getIndex(i)
-            if (index == R.styleable.ThemeTextView_theme_textDarkColor) {
-                textNightColor = typedArray.getColorStateList(index)
+            when(val index = typedArray.getIndex(i)) {
+                R.styleable.ThemeTextView_theme_textDarkColor -> {
+                    textDarkColor = typedArray.getColorStateList(index)
+                }
+                R.styleable.ThemeTextView_theme_backgroundColor -> {
+                    lightBGColor = typedArray.getColorStateList(index)
+                }
+                R.styleable.ThemeTextView_theme_backgroundDarkColor -> {
+                    darBGColor = typedArray.getColorStateList(index)
+                }
             }
         }
-        initialized = true
-        applyTextThemeColor()
+        lightTextColor = textColors
+        if (currentIsDarkModel != AutoThemeManager.isDarkModel()) {
+            applyTextThemeColor()
+        }
     }
 
     override fun setTextAppearance(resId: Int) {
@@ -43,31 +66,27 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
         applyTextThemeColor()
     }
 
-    override fun setTextColor(color: Int) {
-        if (initialized.not()) {
-            lightTextColor = ColorStateList.valueOf(color)
-            return
-        }
-        super.setTextColor(color)
-    }
-
-    override fun setTextColor(colors: ColorStateList?) {
-        if (initialized.not()) {
-            lightTextColor = colors
-            return
-        }
-        super.setTextColor(colors)
-    }
-
     private fun applyTextThemeColor() {
-        // todo aa
-        val isDark = true
-        if (isDark && textNightColor != null) {
-            setTextColor(textNightColor)
-        } else {
-            lightTextColor?.let {
-                setTextColor(it)
+        currentIsDarkModel = AutoThemeManager.isDarkModel()
+        if (AutoThemeManager.isDarkModel() && textDarkColor != null && textDarkColor != textColors) {
+            setTextColor(textDarkColor)
+        } else if (lightTextColor != null && lightTextColor != textColors){
+            setTextColor(lightTextColor)
+        }
+
+        background = GradientDrawable().apply {
+            color = if (currentIsDarkModel) darBGColor else lightBGColor
+            cornerRadius = 10f
+        }
+    }
+
+    override fun onVisibilityChanged(changedView: View, visibility: Int) {
+        super.onVisibilityChanged(changedView, visibility)
+        if (visibility == View.VISIBLE) {
+            if (currentIsDarkModel != AutoThemeManager.isDarkModel()) {
+                applyTextThemeColor()
             }
         }
+        Log.i("---","---:onVisibilityChanged:"+changedView+"_"+visibility)
     }
 }

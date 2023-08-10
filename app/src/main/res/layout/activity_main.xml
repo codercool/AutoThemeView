@@ -7,16 +7,18 @@
     tools:context=".MainActivity">
 
     <com.daimacool.autothemeview.view.ThemeTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tv_test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="Hello World!"
         android:textColor="@color/black"
-        app:theme_textNightColor="@color/qmui_config_color_red"
-        app:theme_backgroundColor="@color/black"
-        app:theme_backgroundNightColor="@color/white"
+        app:theme_textDarkColor="@color/qmui_config_color_red"
+        app:theme_backgroundColor="@color/qmui_config_color_gray_9"
+        app:theme_backgroundDarkColor="@color/teal_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

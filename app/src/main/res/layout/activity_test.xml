@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.daimacool.autothemeview.view.ThemeTextView
+        android:id="@+id/ttv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123"
+        android:textColor="@color/qmui_config_color_gray_9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme_backgroundColor="@color/qmui_btn_blue_bg"
+        app:theme_backgroundDarkColor="@color/teal_200"
+        app:theme_textDarkColor="@color/qmui_config_color_red" />
+
+    <com.daimacool.autothemeview.view.ThemeTextView
+        android:id="@+id/tv_visble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
