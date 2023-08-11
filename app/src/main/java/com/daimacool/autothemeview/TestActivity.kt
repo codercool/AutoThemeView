@@ -17,6 +17,8 @@ class TestActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.ttv_test).setOnClickListener {
             AutoThemeManager.setDarkModel(true)
+            it.isVisible = false
+            it.isVisible = true
         }
 
         findViewById<View>(R.id.tv_visble).setOnClickListener {

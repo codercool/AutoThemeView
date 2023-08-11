@@ -4,5 +4,17 @@
         <attr name="theme_textDarkColor" format="color"/>
         <attr name="theme_backgroundColor" format="color"/>
         <attr name="theme_backgroundDarkColor" format="color"/>
+        <attr name="theme_rippleColor" format="color"/>
+        <attr name="theme_rippleDarkColor" format="color"/>
+        <attr name="theme_isShowRipple" format="dimension"/>
+        <attr name="theme_radius" format="dimension"/>
+        <attr name="theme_radiusTopLeft" format="dimension"/>
+        <attr name="theme_radiusTopRight" format="dimension"/>
+        <attr name="theme_radiusBottomLeft" format="dimension"/>
+        <attr name="theme_radiusBottomRight" format="dimension"/>
+        <attr name="theme_isRadiusAdjustBounds" format="boolean"/>
+        <attr name="theme_borderWidth" format="dimension"/>
+        <attr name="theme_borderColor" format="color"/>
+        <attr name="theme_borderDarkColor" format="color"/>
     </declare-styleable>
 </resources>

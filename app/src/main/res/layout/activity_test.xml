@@ -6,15 +6,23 @@
 
     <com.daimacool.autothemeview.view.ThemeTextView
         android:id="@+id/ttv_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:text="123"
-        android:textColor="@color/qmui_config_color_gray_9"
+        android:textColor="@color/qmui_config_color_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:theme_backgroundColor="@color/qmui_btn_blue_bg"
         app:theme_backgroundDarkColor="@color/teal_200"
-        app:theme_textDarkColor="@color/qmui_config_color_red" />
+        app:theme_textDarkColor="@color/qmui_config_color_red"
+        app:theme_radiusTopLeft="10dp"
+        app:theme_radiusTopRight="10dp"
+        app:theme_radiusBottomLeft="10dp"
+        app:theme_radius="40dp"
+        app:theme_borderWidth="3dp"
+        app:theme_borderColor="@color/design_default_color_primary"
+        app:theme_borderDarkColor="@color/design_default_color_primary_dark"
+        />
 
     <com.daimacool.autothemeview.view.ThemeTextView
         android:id="@+id/tv_visble"
