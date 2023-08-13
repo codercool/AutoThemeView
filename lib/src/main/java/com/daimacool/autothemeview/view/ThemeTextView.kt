@@ -2,12 +2,13 @@ package com.daimacool.autothemeview.view
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
+import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
 import com.daimacool.autothemeview.AutoThemeManager
 import com.daimacool.autothemeview.R
+import kotlin.math.min
 
 class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
 
@@ -16,10 +17,6 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
     private var textDarkColor: ColorStateList? = null
 
     private var lightTextColor: ColorStateList? = null
-
-    private var lightColorBackGround: Drawable? = null
-
-    private var darkColorBackGround: Drawable? = null
 
     private var lightBGColor: ColorStateList? = null
 
@@ -30,10 +27,14 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
     private var mRadiusTopRight = 0
     private var mRadiusBottomLeft = 0
     private var mRadiusBottomRight = 0
+    private var isRadiusAdjustBounds = false
 
     private var borderWith = 0
     private var borderColor: ColorStateList? = null
     private var borderDarkColor: ColorStateList? = null
+
+    private var rippleColor: ColorStateList? = null
+    private var rippleDarkColor: ColorStateList? = null
 
 
     constructor(context: Context) : this(context, null)
@@ -58,6 +59,8 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
         lightBGColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundColor)
         darBGColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundDarkColor)
+        rippleColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleColor)
+        rippleDarkColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleDarkColor)
         radius = typedArray.getDimensionPixelSize(R.styleable.ThemeTextView_theme_radius, 0)
         mRadiusTopLeft =
             typedArray.getDimensionPixelSize(R.styleable.ThemeTextView_theme_radiusTopLeft, 0)
@@ -73,6 +76,8 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_borderColor)
         borderDarkColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_borderDarkColor)
+        isRadiusAdjustBounds = typedArray.getBoolean(R.styleable.ThemeTextView_theme_isRadiusAdjustBounds, false)
+
         lightTextColor = textColors
         applyTextThemeColor()
     }
@@ -91,7 +96,14 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
             setTextColor(lightTextColor)
         }
 
-        background = GradientDrawable().apply {
+        background = object : GradientDrawable() {
+            override fun onBoundsChange(r: Rect) {
+                super.onBoundsChange(r)
+                if (isRadiusAdjustBounds) {
+                    cornerRadius = (min(r.width(), r.height()) / 2).toFloat()
+                }
+            }
+        }.apply {
             color = if (currentIsDarkModel) darBGColor else lightBGColor
             if (mRadiusTopLeft > 0 || mRadiusTopRight > 0 || mRadiusBottomLeft > 0 || mRadiusBottomRight > 0) {
                 cornerRadii = floatArrayOf(
@@ -100,11 +112,17 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
                     mRadiusBottomLeft.toFloat(), mRadiusBottomLeft.toFloat(),
                     mRadiusBottomRight.toFloat(), mRadiusBottomRight.toFloat(),
                 )
+                isRadiusAdjustBounds = false
             } else {
-                cornerRadius = radius.toFloat()
+                if (radius > 0) {
+                    cornerRadius = radius.toFloat()
+                    isRadiusAdjustBounds = false
+                }
             }
             setStroke(borderWith, if (currentIsDarkModel) borderDarkColor else borderColor)
         }
+
+
     }
 
     override fun onVisibilityChanged(changedView: View, visibility: Int) {
