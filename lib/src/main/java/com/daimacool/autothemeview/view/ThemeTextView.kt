@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.view.View
 import com.daimacool.autothemeview.AutoThemeManager
@@ -96,7 +97,7 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
             setTextColor(lightTextColor)
         }
 
-        background = object : GradientDrawable() {
+        val contentDrawable = object : GradientDrawable() {
             override fun onBoundsChange(r: Rect) {
                 super.onBoundsChange(r)
                 if (isRadiusAdjustBounds) {
@@ -122,6 +123,11 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
             setStroke(borderWith, if (currentIsDarkModel) borderDarkColor else borderColor)
         }
 
+        if (rippleDarkColor != null && rippleColor != null) {
+            background = RippleDrawable(if (currentIsDarkModel) rippleDarkColor!! else rippleColor!!, contentDrawable, contentDrawable.constantState?.newDrawable())
+        } else {
+            background = contentDrawable
+        }
 
     }
 

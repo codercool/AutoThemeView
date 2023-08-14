@@ -15,13 +15,15 @@
         app:theme_backgroundColor="@color/qmui_btn_blue_bg"
         app:theme_backgroundDarkColor="@color/teal_200"
         app:theme_textDarkColor="@color/qmui_config_color_red"
-        app:theme_radiusTopLeft="10dp"
-        app:theme_radiusTopRight="10dp"
-        app:theme_radiusBottomLeft="10dp"
+        app:theme_radiusTopLeft="30dp"
+        app:theme_radiusTopRight="30dp"
+        app:theme_radiusBottomLeft="30dp"
         app:theme_radius="40dp"
         app:theme_borderWidth="3dp"
         app:theme_borderColor="@color/design_default_color_primary"
         app:theme_borderDarkColor="@color/design_default_color_primary_dark"
+        app:theme_rippleColor="@color/teal_200"
+        app:theme_rippleDarkColor="@color/qmui_btn_blue_bg"
         />
 
     <com.daimacool.autothemeview.view.ThemeTextView
