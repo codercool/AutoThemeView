@@ -2,44 +2,49 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <com.daimacool.autothemeview.view.ThemeTextView
         android:id="@+id/ttv_test"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="20dp"
         android:text="123"
         android:textColor="@color/qmui_config_color_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme_backgroundColor="@color/qmui_btn_blue_bg"
+        app:theme_backgroundColor="@color/teal_200"
         app:theme_backgroundDarkColor="@color/teal_200"
-        app:theme_textDarkColor="@color/qmui_config_color_red"
-        app:theme_radiusTopLeft="30dp"
-        app:theme_radiusTopRight="30dp"
-        app:theme_radiusBottomLeft="30dp"
-        app:theme_radius="40dp"
-        app:theme_borderWidth="3dp"
         app:theme_borderColor="@color/design_default_color_primary"
         app:theme_borderDarkColor="@color/design_default_color_primary_dark"
-        app:theme_rippleColor="@color/teal_200"
+        app:theme_borderWidth="3dp"
+        app:theme_radius="40dp"
+        app:theme_radiusBottomLeft="30dp"
+        app:theme_radiusTopLeft="30dp"
+        app:theme_radiusTopRight="30dp"
+        app:theme_rippleColor="@color/qmui_config_color_red"
         app:theme_rippleDarkColor="@color/qmui_btn_blue_bg"
-        />
+        app:theme_textDarkColor="@color/qmui_config_color_red" />
+
+    <TextView
+        android:id="@+id/tv_normal"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/teal_200"
+        android:text="1111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.daimacool.autothemeview.view.ThemeTextView
         android:id="@+id/tv_visble"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:text="visible"
-        app:theme_backgroundColor="@color/qmui_btn_blue_bg"
-        app:theme_backgroundDarkColor="@color/teal_200"
-        app:theme_textDarkColor="@color/qmui_config_color_red"
-        app:theme_isRadiusAdjustBounds="true"
-        app:theme_borderWidth="3dp"
-        app:theme_borderColor="@color/design_default_color_primary"
-        app:theme_borderDarkColor="@color/design_default_color_primary_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme_textDarkColor="@color/qmui_config_color_red" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

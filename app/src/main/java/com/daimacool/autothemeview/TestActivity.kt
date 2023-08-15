@@ -17,10 +17,15 @@ class TestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
 
-        findViewById<View>(R.id.ttv_test).setOnClickListener {
-            AutoThemeManager.setDarkModel(true)
-            it.isVisible = false
-            it.isVisible = true
+
+
+        findViewById<View>(R.id.tv_normal).setOnLongClickListener {
+            findViewById<View>(R.id.ttv_test).setOnClickListener {
+                AutoThemeManager.setDarkModel(true)
+                /*it.isVisible = false
+                it.isVisible = true*/
+            }
+            return@setOnLongClickListener true
         }
 
         findViewById<View>(R.id.tv_visble).setOnClickListener {
