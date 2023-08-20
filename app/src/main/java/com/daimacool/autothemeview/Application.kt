@@ -15,11 +15,11 @@ class MyApplication : Application() {
             .setBGDarkColor(com.qmuiteam.qmui.R.color.btn_filled_blue_bg_normal)
             .setBorderLightColor(R.color.purple_200)
             .setBorderDarkColor(R.color.purple_500)
-            .setBorderWidth(3)
-            /*.setIsRadiusAdjustBounds(true)*/
-            .setRadius(40)
-            .setRadiusBottomLeft(20)
-            .setRadiusBottomRight(30)
+            .setBorderWidth(3f)
+            .setIsRadiusAdjustBounds(true)
+            /*.setRadius(40f)
+            .setRadiusBottomLeft(20f)
+            .setRadiusBottomRight(30f)*/
             .setRippleLightColor(R.color.purple_700)
             .setRippleDarkColorColor(R.color.teal_200)
             .setRippleEnable(true)

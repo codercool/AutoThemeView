@@ -9,13 +9,14 @@ import android.util.AttributeSet
 import android.view.View
 import com.daimacool.autothemeview.AutoThemeManager
 import com.daimacool.autothemeview.R
+import com.daimacool.autothemeview.ThemeViewParams
 import kotlin.math.min
 
 class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
 
     private var currentIsDarkModel = false
 
-    private var textDarkColor: ColorStateList? = null
+    /*private var textDarkColor: ColorStateList? = null
 
     private var lightTextColor: ColorStateList? = null
 
@@ -36,7 +37,9 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
 
     private var rippleColor: ColorStateList? = null
     private var rippleDarkColor: ColorStateList? = null
-    private var rippleEnable = false
+    private var rippleEnable = false*/
+
+    private val themeViewParams = ThemeViewParams()
 
     constructor(context: Context) : this(context, null)
 
@@ -58,78 +61,78 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
 
         val defaultParams = AutoThemeManager.getDefaultParams()
 
-        textDarkColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_textDarkColor)
+        themeViewParams.textDarkColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_textDarkColor)
             ?: defaultParams.textDarkColor
 
-        lightBGColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundColor)
+        themeViewParams.bgLightColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundColor)
             ?: defaultParams.bgLightColor
 
-        darBGColor =
+        themeViewParams.bgDarColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundDarkColor)
                 ?: defaultParams.bgDarColor
 
-        rippleColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleColor)
+        themeViewParams.rippleLightColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleColor)
             ?: defaultParams.rippleLightColor
 
-        rippleDarkColor =
+        themeViewParams.rippleDarkColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleDarkColor)
                 ?: defaultParams.rippleDarkColor
 
-        radius = typedArray.getDimensionPixelSize(
+        themeViewParams.radius = typedArray.getDimensionPixelSize(
             R.styleable.ThemeTextView_theme_radius,
             defaultParams.radius
         )
 
-        mRadiusTopLeft =
+        themeViewParams.radiusTopLeft =
             typedArray.getDimensionPixelSize(
                 R.styleable.ThemeTextView_theme_radiusTopLeft,
                 defaultParams.radiusTopLeft
             )
 
-        radiusTopRight =
+        themeViewParams.radiusTopRight =
             typedArray.getDimensionPixelSize(
                 R.styleable.ThemeTextView_theme_radiusTopRight,
                 defaultParams.radiusTopRight
             )
 
-        radiusBottomLeft =
+        themeViewParams.radiusBottomLeft =
             typedArray.getDimensionPixelSize(
                 R.styleable.ThemeTextView_theme_radiusBottomLeft,
                 defaultParams.radiusBottomLeft
             )
 
-        radiusBottomRight =
+        themeViewParams.radiusBottomRight =
             typedArray.getDimensionPixelSize(
                 R.styleable.ThemeTextView_theme_radiusBottomRight,
                 defaultParams.radiusBottomRight
             )
 
-        borderWith =
+        themeViewParams.borderWith =
             typedArray.getDimensionPixelSize(
                 R.styleable.ThemeTextView_theme_borderWidth,
                 defaultParams.borderWith
             )
 
-        borderColor =
+        themeViewParams.borderLightColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_borderColor)
                 ?: defaultParams.borderLightColor
 
-        borderDarkColor =
+        themeViewParams.borderDarkColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_borderDarkColor)
                 ?: defaultParams.borderDarkColor
 
-        isRadiusAdjustBounds =
+        themeViewParams.isRadiusAdjustBounds =
             typedArray.getBoolean(
                 R.styleable.ThemeTextView_theme_isRadiusAdjustBounds,
                 defaultParams.isRadiusAdjustBounds
             )
 
-        rippleEnable = typedArray.getBoolean(
+        themeViewParams.rippleEnable = typedArray.getBoolean(
             R.styleable.ThemeTextView_theme_rippleEnable,
             defaultParams.rippleEnable
         )
         typedArray.recycle()
-        lightTextColor = textColors
+        themeViewParams.lightTextColor = textColors
         applyThemeColor()
     }
 
@@ -151,58 +154,62 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
     private fun applyThemeColor() {
         currentIsDarkModel = AutoThemeManager.isDarkModel()
 
-        if (currentIsDarkModel && textDarkColor != null && textDarkColor != textColors) {
-            setTextColor(textDarkColor)
-        } else if (lightTextColor != null && lightTextColor != textColors) {
-            setTextColor(lightTextColor)
+        if (currentIsDarkModel && themeViewParams.textDarkColor != null && themeViewParams.textDarkColor != textColors) {
+            setTextColor(themeViewParams.textDarkColor)
+        } else if (themeViewParams.lightTextColor != null && themeViewParams.lightTextColor != textColors) {
+            setTextColor(themeViewParams.lightTextColor)
         }
         applyBGThemeColor()
     }
 
     private fun applyBGThemeColor() {
-        if (lightBGColor == null || darBGColor == null) return
-        val contentDrawable = object : GradientDrawable() {
+        if (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null || themeViewParams.rippleEnable && (isClickable || isLongClickable)) return
+
+        val contentDrawable = createContentDrawable()
+        background = if (themeViewParams.rippleEnable && (isClickable || isLongClickable) && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null) {
+            RippleDrawable(
+                    if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
+                    contentDrawable,
+                    contentDrawable.constantState?.newDrawable()
+            )
+        } else {
+            contentDrawable
+        }
+    }
+
+    private fun createContentDrawable() :GradientDrawable{
+        return object : GradientDrawable() {
             override fun onBoundsChange(r: Rect) {
                 super.onBoundsChange(r)
-                if (isRadiusAdjustBounds) {
+                if (themeViewParams.isRadiusAdjustBounds) {
                     cornerRadius = (min(r.width(), r.height()) / 2).toFloat()
                 }
             }
         }.apply {
-            color = if (currentIsDarkModel) darBGColor else lightBGColor
-            if (mRadiusTopLeft > 0 || radiusTopRight > 0 || radiusBottomLeft > 0 || radiusBottomRight > 0) {
+            color = if (currentIsDarkModel) themeViewParams.bgDarColor else themeViewParams.bgLightColor
+            if (themeViewParams.radiusTopLeft > 0 || themeViewParams.radiusTopRight > 0 || themeViewParams.radiusBottomLeft > 0 || themeViewParams.radiusBottomRight > 0) {
                 cornerRadii = floatArrayOf(
-                    mRadiusTopLeft.toFloat(), mRadiusTopLeft.toFloat(),
-                    radiusTopRight.toFloat(), radiusTopRight.toFloat(),
-                    radiusBottomLeft.toFloat(), radiusBottomLeft.toFloat(),
-                    radiusBottomRight.toFloat(), radiusBottomRight.toFloat(),
+                        themeViewParams.radiusTopLeft.toFloat(), themeViewParams.radiusTopLeft.toFloat(),
+                        themeViewParams.radiusTopRight.toFloat(), themeViewParams.radiusTopRight.toFloat(),
+                        themeViewParams.radiusBottomLeft.toFloat(), themeViewParams.radiusBottomLeft.toFloat(),
+                        themeViewParams.radiusBottomRight.toFloat(), themeViewParams.radiusBottomRight.toFloat(),
                 )
-                isRadiusAdjustBounds = false
+                themeViewParams.isRadiusAdjustBounds = false
             } else {
-                if (radius > 0) {
-                    cornerRadius = radius.toFloat()
-                    isRadiusAdjustBounds = false
+                if (themeViewParams.radius > 0) {
+                    cornerRadius = themeViewParams.radius.toFloat()
+                    themeViewParams.isRadiusAdjustBounds = false
                 }
             }
-            setStroke(borderWith, if (currentIsDarkModel) borderDarkColor else borderColor)
-        }
-
-        if (rippleEnable && (isClickable || isLongClickable) && rippleDarkColor != null && rippleColor != null) {
-            background = RippleDrawable(
-                if (currentIsDarkModel) rippleDarkColor!! else rippleColor!!,
-                contentDrawable,
-                contentDrawable.constantState?.newDrawable()
-            )
-        } else {
-            background = contentDrawable
+            setStroke(themeViewParams.borderWith, if (currentIsDarkModel) themeViewParams.borderDarkColor else themeViewParams.borderLightColor)
         }
     }
 
     private fun updateClickBGDrawable() {
         val currentDrawable = background
-        if (rippleEnable && rippleDarkColor != null && rippleColor != null && currentDrawable != null && currentDrawable !is RippleDrawable) {
+        if (themeViewParams.rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null && currentDrawable != null && currentDrawable !is RippleDrawable) {
             background = RippleDrawable(
-                if (currentIsDarkModel) rippleDarkColor!! else rippleColor!!,
+                if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
                 currentDrawable,
                 currentDrawable.constantState?.newDrawable()
             )

@@ -8,7 +8,7 @@ object AutoThemeManager {
 
     private var isDakModel = false
 
-    private var defaultParams: ThemeViewDefaultParams? = null
+    private var defaultParams: ThemeViewParams? = null
 
     fun isDarkModel(): Boolean {
         return isDakModel
@@ -18,21 +18,21 @@ object AutoThemeManager {
         isDakModel = isDark
     }
 
-    fun setDefaultParams(defaultParams: ThemeViewDefaultParams) {
+    fun setDefaultParams(defaultParams: ThemeViewParams) {
         this.defaultParams = defaultParams
     }
 
-    fun getDefaultParams(): ThemeViewDefaultParams {
+    fun getDefaultParams(): ThemeViewParams {
         if (defaultParams == null) {
-            defaultParams = ThemeViewDefaultParams()
+            defaultParams = ThemeViewParams()
         }
         return defaultParams!!
     }
 
     class Builder(private val context: Context) {
-        private val params = ThemeViewDefaultParams()
+        private val params = ThemeViewParams()
 
-        fun build(): ThemeViewDefaultParams {
+        fun build(): ThemeViewParams {
             return params
         }
 
@@ -52,45 +52,28 @@ object AutoThemeManager {
         }
 
         fun setRadius(radiusDP: Float): Builder {
-            params.radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, radiusDP, resources.displayMetrics)
-                TypedValue.complexToDimensionPixelSize(radiusDP, context.resources.displayMetrics)
+            params.radius = applyDimension(radiusDP)
             return this
         }
 
-        fun setRadiusTopLeft(radiusTopLeftDP: Int): Builder {
-            params.radiusTopLeft =
-                TypedValue.complexToDimensionPixelSize(
-                    radiusTopLeftDP,
-                    context.resources.displayMetrics
-                )
+        fun setRadiusTopLeft(radiusTopLeftDP: Float): Builder {
+            params.radiusTopLeft = applyDimension(radiusTopLeftDP)
             return this
         }
 
 
-        fun setRadiusTopRight(radiusTopRightDP: Int): Builder {
-            params.radiusTopRight =
-                TypedValue.complexToDimensionPixelSize(
-                    radiusTopRightDP,
-                    context.resources.displayMetrics
-                )
+        fun setRadiusTopRight(radiusTopRightDP: Float): Builder {
+            params.radiusTopRight = applyDimension(radiusTopRightDP)
             return this
         }
 
-        fun setRadiusBottomLeft(radiusBottomLeftDP: Int): Builder {
-            params.radiusBottomLeft =
-                TypedValue.complexToDimensionPixelSize(
-                    radiusBottomLeftDP,
-                    context.resources.displayMetrics
-                )
+        fun setRadiusBottomLeft(radiusBottomLeftDP: Float): Builder {
+            params.radiusBottomLeft = applyDimension(radiusBottomLeftDP)
             return this
         }
 
-        fun setRadiusBottomRight(radiusBottomRightDP: Int): Builder {
-            params.radiusBottomRight =
-                TypedValue.complexToDimensionPixelSize(
-                    radiusBottomRightDP,
-                    context.resources.displayMetrics
-                )
+        fun setRadiusBottomRight(radiusBottomRightDP: Float): Builder {
+            params.radiusBottomRight = applyDimension(radiusBottomRightDP)
             return this
         }
 
@@ -99,57 +82,38 @@ object AutoThemeManager {
             return this
         }
 
-        fun setBorderWidth(borderWith:Int): Builder {
-            params.borderWith = borderWith
+        fun setBorderWidth(borderWith: Float): Builder {
+            params.borderWith = applyDimension(borderWith)
             return this
         }
 
-        fun setBorderLightColor(borderLightColorRes:Int): Builder {
+        fun setBorderLightColor(borderLightColorRes: Int): Builder {
             params.borderLightColor = context.getColorStateList(borderLightColorRes)
             return this
         }
 
-        fun setBorderDarkColor(borderDarkColorRes:Int): Builder {
+        fun setBorderDarkColor(borderDarkColorRes: Int): Builder {
             params.borderDarkColor = context.getColorStateList(borderDarkColorRes)
             return this
         }
 
-        fun setRippleLightColor(rippleLightColorRes:Int): Builder {
+        fun setRippleLightColor(rippleLightColorRes: Int): Builder {
             params.rippleLightColor = context.getColorStateList(rippleLightColorRes)
             return this
         }
 
-        fun setRippleDarkColorColor(rippleDarkColorRes:Int): Builder {
+        fun setRippleDarkColorColor(rippleDarkColorRes: Int): Builder {
             params.rippleDarkColor = context.getColorStateList(rippleDarkColorRes)
             return this
         }
 
-        fun setRippleEnable(rippleEnable:Boolean): Builder {
+        fun setRippleEnable(rippleEnable: Boolean): Builder {
             params.rippleEnable = rippleEnable
             return this
         }
-    }
 
-    class ThemeViewDefaultParams {
-        var textDarkColor: ColorStateList? = null
-        var lightTextColor: ColorStateList? = null
-
-        var bgLightColor: ColorStateList? = null
-        var bgDarColor: ColorStateList? = null
-
-        var radius: Int = 0
-        var radiusTopLeft = 0
-        var radiusTopRight = 0
-        var radiusBottomLeft = 0
-        var radiusBottomRight = 0
-        var isRadiusAdjustBounds = false
-
-        var borderWith = 0
-        var borderLightColor: ColorStateList? = null
-        var borderDarkColor: ColorStateList? = null
-
-        var rippleLightColor: ColorStateList? = null
-        var rippleDarkColor: ColorStateList? = null
-        var rippleEnable = false
+        private fun applyDimension(sizeDP: Float): Int {
+            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sizeDP, context.resources.displayMetrics).toInt()
+        }
     }
 }
