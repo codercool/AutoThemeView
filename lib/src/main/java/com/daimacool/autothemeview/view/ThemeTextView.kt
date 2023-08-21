@@ -16,29 +16,6 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
 
     private var currentIsDarkModel = false
 
-    /*private var textDarkColor: ColorStateList? = null
-
-    private var lightTextColor: ColorStateList? = null
-
-    private var lightBGColor: ColorStateList? = null
-
-    private var darBGColor: ColorStateList? = null
-
-    private var radius: Int = 0
-    private var mRadiusTopLeft = 0
-    private var radiusTopRight = 0
-    private var radiusBottomLeft = 0
-    private var radiusBottomRight = 0
-    private var isRadiusAdjustBounds = false
-
-    private var borderWith = 0
-    private var borderColor: ColorStateList? = null
-    private var borderDarkColor: ColorStateList? = null
-
-    private var rippleColor: ColorStateList? = null
-    private var rippleDarkColor: ColorStateList? = null
-    private var rippleEnable = false*/
-
     private val themeViewParams = ThemeViewParams()
 
     constructor(context: Context) : this(context, null)
@@ -163,10 +140,11 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
     }
 
     private fun applyBGThemeColor() {
-        if (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null || themeViewParams.rippleEnable && (isClickable || isLongClickable)) return
+        val rippleEnable = themeViewParams.rippleEnable && (isClickable || isLongClickable)
+        if (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null || rippleEnable.not()) return
 
         val contentDrawable = createContentDrawable()
-        background = if (themeViewParams.rippleEnable && (isClickable || isLongClickable) && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null) {
+        background = if (rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null) {
             RippleDrawable(
                     if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
                     contentDrawable,
@@ -206,8 +184,8 @@ class ThemeTextView : androidx.appcompat.widget.AppCompatTextView {
     }
 
     private fun updateClickBGDrawable() {
-        val currentDrawable = background
-        if (themeViewParams.rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null && currentDrawable != null && currentDrawable !is RippleDrawable) {
+        val currentDrawable = background ?: createContentDrawable()
+        if (themeViewParams.rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null && currentDrawable !is RippleDrawable) {
             background = RippleDrawable(
                 if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
                 currentDrawable,
