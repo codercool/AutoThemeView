@@ -6,31 +6,22 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.view.View
-import androidx.appcompat.widget.AppCompatTextView
+import android.widget.TextView
 import com.daimacool.autothemeview.AutoThemeManager
 import com.daimacool.autothemeview.R
 import com.daimacool.autothemeview.ThemeViewParams
 import kotlin.math.min
 
-class ThemeTextView : AppCompatTextView {
-
+/**
+ * Copyright © 2024/4/6 Hugecore Information Technology (Guangzhou) Co.,Ltd. All rights reserved.
+ * author: YHL
+ */
+class ThemeViewHelper(private val view:View) {
     private var currentIsDarkModel = false
 
     private val themeViewParams = ThemeViewParams()
 
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : this(
-        context, attrs, android.R.attr.textViewStyle
-    )
-
-    constructor(
-        context: Context, attrs: AttributeSet?, defStyleAttr: Int
-    ) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
+    fun initParams(context:Context, attrs: AttributeSet?, defStyleAttr: Int = 0) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ThemeTextView, defStyleAttr, 0)
 
         val defaultParams = AutoThemeManager.getDefaultParams()
@@ -106,53 +97,43 @@ class ThemeTextView : AppCompatTextView {
             defaultParams.rippleEnable
         )
         typedArray.recycle()
-        themeViewParams.lightTextColor = textColors
+        if (view is TextView) themeViewParams.lightTextColor = view.textColors
         applyThemeColor()
     }
 
-    override fun setTextAppearance(resId: Int) {
-        super.setTextAppearance(resId)
-        applyThemeColor()
-    }
-
-    override fun setOnClickListener(l: OnClickListener?) {
-        super.setOnClickListener(l)
-        updateClickBGDrawable()
-    }
-
-    override fun setOnLongClickListener(l: OnLongClickListener?) {
-        super.setOnLongClickListener(l)
-        updateClickBGDrawable()
-    }
 
     private fun applyThemeColor() {
         currentIsDarkModel = AutoThemeManager.isDarkModel()
-
-        if (currentIsDarkModel && themeViewParams.textDarkColor != null && themeViewParams.textDarkColor != textColors) {
-            setTextColor(themeViewParams.textDarkColor)
-        } else if (themeViewParams.lightTextColor != null && themeViewParams.lightTextColor != textColors) {
-            setTextColor(themeViewParams.lightTextColor)
-        }
+        if (view is TextView) applyTextThemeColor()
         applyBGThemeColor()
     }
 
+    private fun applyTextThemeColor() {
+        if (view !is TextView) return
+        if (currentIsDarkModel && themeViewParams.textDarkColor != null && themeViewParams.textDarkColor != view.textColors) {
+            view.setTextColor(themeViewParams.textDarkColor)
+        } else if (themeViewParams.lightTextColor != null && themeViewParams.lightTextColor != view.textColors) {
+            view.setTextColor(themeViewParams.lightTextColor)
+        }
+    }
+
     private fun applyBGThemeColor() {
-        val rippleEnable = themeViewParams.rippleEnable && (isClickable || isLongClickable)
+        val rippleEnable = themeViewParams.rippleEnable && (view.isClickable || view.isLongClickable)
         if (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null || rippleEnable.not()) return
 
         val contentDrawable = createContentDrawable()
-        background = if (rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null) {
+        view.background = if (rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null) {
             RippleDrawable(
-                    if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
-                    contentDrawable,
-                    contentDrawable.constantState?.newDrawable()
+                if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
+                contentDrawable,
+                contentDrawable.constantState?.newDrawable()
             )
         } else {
             contentDrawable
         }
     }
 
-    private fun createContentDrawable() :GradientDrawable{
+    private fun createContentDrawable() : GradientDrawable {
         return object : GradientDrawable() {
             override fun onBoundsChange(r: Rect) {
                 super.onBoundsChange(r)
@@ -164,10 +145,10 @@ class ThemeTextView : AppCompatTextView {
             color = if (currentIsDarkModel) themeViewParams.bgDarColor else themeViewParams.bgLightColor
             if (themeViewParams.radiusTopLeft > 0 || themeViewParams.radiusTopRight > 0 || themeViewParams.radiusBottomLeft > 0 || themeViewParams.radiusBottomRight > 0) {
                 cornerRadii = floatArrayOf(
-                        themeViewParams.radiusTopLeft.toFloat(), themeViewParams.radiusTopLeft.toFloat(),
-                        themeViewParams.radiusTopRight.toFloat(), themeViewParams.radiusTopRight.toFloat(),
-                        themeViewParams.radiusBottomLeft.toFloat(), themeViewParams.radiusBottomLeft.toFloat(),
-                        themeViewParams.radiusBottomRight.toFloat(), themeViewParams.radiusBottomRight.toFloat(),
+                    themeViewParams.radiusTopLeft.toFloat(), themeViewParams.radiusTopLeft.toFloat(),
+                    themeViewParams.radiusTopRight.toFloat(), themeViewParams.radiusTopRight.toFloat(),
+                    themeViewParams.radiusBottomLeft.toFloat(), themeViewParams.radiusBottomLeft.toFloat(),
+                    themeViewParams.radiusBottomRight.toFloat(), themeViewParams.radiusBottomRight.toFloat(),
                 )
                 themeViewParams.isRadiusAdjustBounds = false
             } else {
@@ -180,10 +161,10 @@ class ThemeTextView : AppCompatTextView {
         }
     }
 
-    private fun updateClickBGDrawable() {
-        val currentDrawable = background ?: createContentDrawable()
+    fun updateClickBGDrawable() {
+        val currentDrawable = view.background ?: createContentDrawable()
         if (themeViewParams.rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null && currentDrawable !is RippleDrawable) {
-            background = RippleDrawable(
+            view.background = RippleDrawable(
                 if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
                 currentDrawable,
                 currentDrawable.constantState?.newDrawable()
@@ -191,12 +172,13 @@ class ThemeTextView : AppCompatTextView {
         }
     }
 
-    override fun onVisibilityChanged(changedView: View, visibility: Int) {
-        super.onVisibilityChanged(changedView, visibility)
+    fun onVisibilityChanged(visibility: Int) {
         if (visibility == View.VISIBLE) {
             if (currentIsDarkModel != AutoThemeManager.isDarkModel()) {
                 applyThemeColor()
             }
         }
     }
+
+
 }

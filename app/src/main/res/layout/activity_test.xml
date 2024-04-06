@@ -47,4 +47,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:theme_textDarkColor="@color/qmui_config_color_red" />
 
+    <com.daimacool.autothemeview.view.ThemeLinearlayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_visble"
+        app:layout_constraintStart_toStartOf="parent"
+        app:theme_backgroundColor="@color/black"
+        app:theme_backgroundDarkColor="@color/btn_filled_blue_bg_disabled"
+        app:theme_radius="40dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ThemeLinearlayout"
+            />
+    </com.daimacool.autothemeview.view.ThemeLinearlayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
