@@ -1,4 +1,4 @@
-package com.daimacool.autothemeview
+package com.codecool.autothemeview
 
 import android.app.Application
 
@@ -12,7 +12,7 @@ class MyApplication : Application() {
         val params = AutoThemeManager.Builder(this)
             .setTextDarkColor(R.color.white)
             .setBGLightColor(R.color.teal_700)
-            .setBGDarkColor(com.qmuiteam.qmui.R.color.btn_filled_blue_bg_normal)
+            .setBGDarkColor(R.color.color_blue_bg_normal)
             .setBorderLightColor(R.color.purple_200)
             .setBorderDarkColor(R.color.purple_500)
             .setBorderWidth(3f)

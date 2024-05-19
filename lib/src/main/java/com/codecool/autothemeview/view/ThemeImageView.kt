@@ -1,19 +1,20 @@
-package com.daimacool.autothemeview.view
+package com.codecool.autothemeview.view
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatImageView
+import com.codecool.autothemeview.helper.ThemeImageViewHelper
 
 /**
  * Copyright © 2024/4/5 Hugecore Information Technology (Guangzhou) Co.,Ltd. All rights reserved.
  * author: YHL
  */
-class ThemeLinearlayout @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0, defStyleRes: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
+class ThemeImageView @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0
+) : AppCompatImageView(context, attrs, defStyleAttr) {
 
-    private var themeViewHelper = ThemeViewHelper(this)
+    private var themeViewHelper = ThemeImageViewHelper(this)
 
     init {
         themeViewHelper.initParams(context, attrs, defStyleAttr)

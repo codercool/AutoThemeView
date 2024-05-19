@@ -1,4 +1,4 @@
-package com.daimacool.autothemeview
+package com.codecool.autothemeview
 
 import org.junit.Test
 

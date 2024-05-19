@@ -1,7 +1,6 @@
-package com.daimacool.autothemeview
+package com.codecool.autothemeview
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.TypedValue
 
 object AutoThemeManager {

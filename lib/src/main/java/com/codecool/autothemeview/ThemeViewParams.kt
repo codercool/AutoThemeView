@@ -1,6 +1,7 @@
-package com.daimacool.autothemeview
+package com.codecool.autothemeview
 
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 
 /**
  * Copyright © 2023/8/20 Hugecore Information Technology (Guangzhou) Co.,Ltd. All rights reserved.
@@ -12,6 +13,9 @@ open class ThemeViewParams {
 
     var bgLightColor: ColorStateList? = null
     var bgDarColor: ColorStateList? = null
+
+    var lightImgSrc:Drawable? = null
+    var darkImgSrc:Drawable? = null
 
     var radius: Int = 0
     var radiusTopLeft = 0
