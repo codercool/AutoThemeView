@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.codecool.autothemeview'
+    namespace 'com.codercool.autothemeview'
     compileSdk 33
 
     defaultConfig {

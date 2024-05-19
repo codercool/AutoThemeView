@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     >
 
-    <com.codecool.autothemeview.view.ThemeTextView
+    <com.codercool.autothemeview.view.ThemeTextView
         android:id="@+id/ttv_test"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.codecool.autothemeview.view.ThemeTextView
+    <com.codercool.autothemeview.view.ThemeTextView
         android:id="@+id/tv_visble"
         android:layout_width="50dp"
         android:layout_height="40dp"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:theme_textDarkColor="@color/color_red" />
 
-    <com.codecool.autothemeview.view.ThemeLinearlayout
+    <com.codercool.autothemeview.view.ThemeLinearlayout
         android:id="@+id/ll_theme"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -62,9 +62,9 @@
             android:layout_height="wrap_content"
             android:text="ThemeLinearlayout"
             />
-    </com.codecool.autothemeview.view.ThemeLinearlayout>
+    </com.codercool.autothemeview.view.ThemeLinearlayout>
 
-    <com.codecool.autothemeview.view.ThemeImageView
+    <com.codercool.autothemeview.view.ThemeImageView
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:layout_constraintTop_toBottomOf="@+id/ll_theme"
