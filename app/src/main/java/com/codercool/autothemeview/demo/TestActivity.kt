@@ -1,10 +1,12 @@
-package com.codercool.autothemeview
+package com.codercool.autothemeview.demo
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
+import com.codercool.autothemeview.AutoThemeManager
+import com.codercool.autothemeview.demo.R
 
 /**
  *  Copyright © 2023/8/10 Hugecore Information Technology (Guangzhou) Co.,Ltd. All rights reserved.

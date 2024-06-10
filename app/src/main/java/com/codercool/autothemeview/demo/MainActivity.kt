@@ -1,9 +1,10 @@
-package com.codercool.autothemeview
+package com.codercool.autothemeview.demo
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.codercool.autothemeview.demo.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

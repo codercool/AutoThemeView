@@ -1,6 +1,8 @@
-package com.codercool.autothemeview
+package com.codercool.autothemeview.demo
 
 import android.app.Application
+import com.codercool.autothemeview.AutoThemeManager
+import com.codercool.autothemeview.demo.R
 
 /**
  *  Copyright © 2023/8/15 Hugecore Information Technology (Guangzhou) Co.,Ltd. All rights reserved.
