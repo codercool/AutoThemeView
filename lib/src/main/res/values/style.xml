@@ -34,7 +34,7 @@
         <attr name="theme_borderDarkColor" />
     </declare-styleable>
 
-    <declare-styleable name="ThemeTextView">
+    <declare-styleable name="ThemeButton">
         <attr name="theme_backgroundColor" />
         <attr name="theme_backgroundDarkColor" />
         <attr name="theme_rippleColor" />
@@ -49,8 +49,42 @@
         <attr name="theme_borderWidth" />
         <attr name="theme_borderColor" />
         <attr name="theme_borderDarkColor" />
-        <!--需要基于ThemeView的属性扩展-->
-        <attr name="theme_textDarkColor" />
+    </declare-styleable>
+
+    <declare-styleable name="ThemeConstraintLayout">
+        <attr name="theme_backgroundColor" />
+        <attr name="theme_backgroundDarkColor" />
+        <attr name="theme_rippleColor" />
+        <attr name="theme_rippleDarkColor" />
+        <attr name="theme_rippleEnable" />
+        <attr name="theme_radius" />
+        <attr name="theme_radiusTopLeft" />
+        <attr name="theme_radiusTopRight" />
+        <attr name="theme_radiusBottomLeft" />
+        <attr name="theme_radiusBottomRight" />
+        <attr name="theme_isRadiusAdjustBounds" />
+        <attr name="theme_borderWidth" />
+        <attr name="theme_borderColor" />
+        <attr name="theme_borderDarkColor" />
+        <!--与ThemeView的属性一致-->
+    </declare-styleable>
+
+    <declare-styleable name="ThemeFrameLayout">
+        <attr name="theme_backgroundColor" />
+        <attr name="theme_backgroundDarkColor" />
+        <attr name="theme_rippleColor" />
+        <attr name="theme_rippleDarkColor" />
+        <attr name="theme_rippleEnable" />
+        <attr name="theme_radius" />
+        <attr name="theme_radiusTopLeft" />
+        <attr name="theme_radiusTopRight" />
+        <attr name="theme_radiusBottomLeft" />
+        <attr name="theme_radiusBottomRight" />
+        <attr name="theme_isRadiusAdjustBounds" />
+        <attr name="theme_borderWidth" />
+        <attr name="theme_borderColor" />
+        <attr name="theme_borderDarkColor" />
+        <!--与ThemeView的属性一致-->
     </declare-styleable>
 
     <declare-styleable name="ThemeImageView">
@@ -88,6 +122,43 @@
         <attr name="theme_borderColor" />
         <attr name="theme_borderDarkColor" />
         <!--与ThemeView的属性一致-->
+    </declare-styleable>
+
+    <declare-styleable name="ThemeRelativeLayout">
+        <attr name="theme_backgroundColor" />
+        <attr name="theme_backgroundDarkColor" />
+        <attr name="theme_rippleColor" />
+        <attr name="theme_rippleDarkColor" />
+        <attr name="theme_rippleEnable" />
+        <attr name="theme_radius" />
+        <attr name="theme_radiusTopLeft" />
+        <attr name="theme_radiusTopRight" />
+        <attr name="theme_radiusBottomLeft" />
+        <attr name="theme_radiusBottomRight" />
+        <attr name="theme_isRadiusAdjustBounds" />
+        <attr name="theme_borderWidth" />
+        <attr name="theme_borderColor" />
+        <attr name="theme_borderDarkColor" />
+        <!--与ThemeView的属性一致-->
+    </declare-styleable>
+
+    <declare-styleable name="ThemeTextView">
+        <attr name="theme_backgroundColor" />
+        <attr name="theme_backgroundDarkColor" />
+        <attr name="theme_rippleColor" />
+        <attr name="theme_rippleDarkColor" />
+        <attr name="theme_rippleEnable" />
+        <attr name="theme_radius" />
+        <attr name="theme_radiusTopLeft" />
+        <attr name="theme_radiusTopRight" />
+        <attr name="theme_radiusBottomLeft" />
+        <attr name="theme_radiusBottomRight" />
+        <attr name="theme_isRadiusAdjustBounds" />
+        <attr name="theme_borderWidth" />
+        <attr name="theme_borderColor" />
+        <attr name="theme_borderDarkColor" />
+        <!--需要基于ThemeView的属性扩展-->
+        <attr name="theme_textDarkColor" />
     </declare-styleable>
 
 </resources>
