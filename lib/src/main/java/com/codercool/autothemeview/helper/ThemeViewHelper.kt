@@ -1,7 +1,9 @@
 package com.codercool.autothemeview.helper
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.TypedArray
+import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -16,28 +18,34 @@ import kotlin.math.min
  * Copyright © 2024/4/6 Hugecore Information Technology (Guangzhou) Co.,Ltd. All rights reserved.
  * author: YHL
  */
-open class ThemeViewHelper(private val view:View) {
+open class ThemeViewHelper(private val view: View) {
     protected var currentIsDarkModel = false
 
     protected val themeViewParams = ThemeViewParams()
 
+    private val noTransparentColor =
+        ColorStateList.valueOf(Color.parseColor("#01000000")) // 非全透明的颜色
+
     open fun getStyleable(): IntArray = R.styleable.ThemeView
 
-    fun initParams(context:Context, attrs: AttributeSet?, defStyleAttr: Int = 0) {
-        val typedArray = context.obtainStyledAttributes(attrs,
-            getStyleable(), defStyleAttr, 0)
+    fun initParams(context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0) {
+        val typedArray = context.obtainStyledAttributes(
+            attrs, getStyleable(), defStyleAttr, 0
+        )
 
         val defaultParams = AutoThemeManager.getDefaultParams()
 
-        themeViewParams.bgLightColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundColor)
-            ?: defaultParams.bgLightColor
+        themeViewParams.bgLightColor =
+            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundColor)
+                ?: defaultParams.bgLightColor
 
         themeViewParams.bgDarColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundDarkColor)
                 ?: defaultParams.bgDarColor
 
-        themeViewParams.rippleLightColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleColor)
-            ?: defaultParams.rippleLightColor
+        themeViewParams.rippleLightColor =
+            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleColor)
+                ?: defaultParams.rippleLightColor
 
         themeViewParams.rippleDarkColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleDarkColor)
@@ -89,12 +97,12 @@ open class ThemeViewHelper(private val view:View) {
         themeViewParams.rippleEnable = typedArray.getBoolean(
             R.styleable.ThemeTextView_theme_rippleEnable, defaultParams.rippleEnable
         )
-        initParams(typedArray,defaultParams)
+        initParams(typedArray, defaultParams)
         typedArray.recycle()
         applyThemeColor()
     }
 
-    open fun initParams(typedArray:TypedArray,defaultParams: ThemeViewParams) {}
+    open fun initParams(typedArray: TypedArray, defaultParams: ThemeViewParams) {}
 
 
     open fun applyThemeColor() {
@@ -103,22 +111,24 @@ open class ThemeViewHelper(private val view:View) {
     }
 
     private fun applyBGThemeColor() {
-        val rippleEnable = themeViewParams.rippleEnable && (view.isClickable || view.isLongClickable)
+        val rippleEnable =
+            themeViewParams.rippleEnable && (view.isClickable || view.isLongClickable)
         if (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null) return
 
         val contentDrawable = createContentDrawable()
-        view.background = if (rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null) {
-            RippleDrawable(
-                if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
-                contentDrawable,
-                contentDrawable.constantState?.newDrawable()
-            )
-        } else {
-            contentDrawable
-        }
+        view.background =
+            if (rippleEnable && themeViewParams.rippleDarkColor != null && themeViewParams.rippleLightColor != null) {
+                RippleDrawable(
+                    if (currentIsDarkModel) themeViewParams.rippleDarkColor!! else themeViewParams.rippleLightColor!!,
+                    contentDrawable,
+                    contentDrawable.constantState?.newDrawable()
+                )
+            } else {
+                contentDrawable
+            }
     }
 
-    private fun createContentDrawable() : GradientDrawable {
+    private fun createContentDrawable(): GradientDrawable {
         return object : GradientDrawable() {
             override fun onBoundsChange(r: Rect) {
                 super.onBoundsChange(r)
@@ -127,13 +137,23 @@ open class ThemeViewHelper(private val view:View) {
                 }
             }
         }.apply {
-            color = if (currentIsDarkModel) themeViewParams.bgDarColor else themeViewParams.bgLightColor
+            var colorList =
+                if (currentIsDarkModel) themeViewParams.bgDarColor else themeViewParams.bgLightColor
+            // 如果没有设置背景颜色，或背景全透明，设个非全透明的颜色，防止点击无水波纹效果
+            if (themeViewParams.rippleEnable && (colorList == null || Color.alpha(colorList.defaultColor) == Color.TRANSPARENT))
+                colorList = noTransparentColor
+            color = colorList
+
             if (themeViewParams.radiusTopLeft > 0 || themeViewParams.radiusTopRight > 0 || themeViewParams.radiusBottomLeft > 0 || themeViewParams.radiusBottomRight > 0) {
                 cornerRadii = floatArrayOf(
-                    themeViewParams.radiusTopLeft.toFloat(), themeViewParams.radiusTopLeft.toFloat(),
-                    themeViewParams.radiusTopRight.toFloat(), themeViewParams.radiusTopRight.toFloat(),
-                    themeViewParams.radiusBottomLeft.toFloat(), themeViewParams.radiusBottomLeft.toFloat(),
-                    themeViewParams.radiusBottomRight.toFloat(), themeViewParams.radiusBottomRight.toFloat(),
+                    themeViewParams.radiusTopLeft.toFloat(),
+                    themeViewParams.radiusTopLeft.toFloat(),
+                    themeViewParams.radiusTopRight.toFloat(),
+                    themeViewParams.radiusTopRight.toFloat(),
+                    themeViewParams.radiusBottomLeft.toFloat(),
+                    themeViewParams.radiusBottomLeft.toFloat(),
+                    themeViewParams.radiusBottomRight.toFloat(),
+                    themeViewParams.radiusBottomRight.toFloat(),
                 )
                 themeViewParams.isRadiusAdjustBounds = false
             } else {
@@ -142,7 +162,10 @@ open class ThemeViewHelper(private val view:View) {
                     themeViewParams.isRadiusAdjustBounds = false
                 }
             }
-            setStroke(themeViewParams.borderWith, if (currentIsDarkModel) themeViewParams.borderDarkColor else themeViewParams.borderLightColor)
+            setStroke(
+                themeViewParams.borderWith,
+                if (currentIsDarkModel) themeViewParams.borderDarkColor else themeViewParams.borderLightColor
+            )
         }
     }
 
