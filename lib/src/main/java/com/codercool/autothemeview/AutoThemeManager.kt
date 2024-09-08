@@ -35,17 +35,33 @@ object AutoThemeManager {
             return params
         }
 
+        /**
+         * 设置文字默认夜间颜色
+         * 日间文字默认颜色系统默认已提供，如有需要请在主题中使用下列方式覆盖
+         * <style name="TextAppearance">
+         *   <item name="textColor">?textColorPrimary</item>
+         * </style>
+         * */
         fun setTextDarkColor(textDarkColorRes: Int): Builder {
             params.textDarkColor = context.getColorStateList(textDarkColorRes)
             return this
         }
 
-        fun setBGLightColor(lightBGColorRes: Int): Builder {
-            params.bgLightColor = context.getColorStateList(lightBGColorRes)
+        /**
+         * 设置提示文字默认夜间颜色
+         * 日间提示文字默认颜色系统默认已提供，如有需要请在主题中使用下列方式覆盖
+         * <style name="TextAppearance">
+         *    <item name="textColorHint">?textColorHint</item>
+         * </style>
+         * */
+        fun setTextHintDarkColor(textHintDarkColorRes: Int): Builder {
+            params.textHintDarkColor = context.getColorStateList(textHintDarkColorRes)
             return this
         }
 
-        fun setBGDarkColor(darkBGColorRes: Int): Builder {
+        /**设置默认背景色*/
+        fun setBGColor(lightBGColorRes: Int, darkBGColorRes: Int): Builder {
+            params.bgLightColor = context.getColorStateList(lightBGColorRes)
             params.bgDarColor = context.getColorStateList(darkBGColorRes)
             return this
         }
@@ -112,7 +128,11 @@ object AutoThemeManager {
         }
 
         private fun applyDimension(sizeDP: Float): Int {
-            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sizeDP, context.resources.displayMetrics).toInt()
+            return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                sizeDP,
+                context.resources.displayMetrics
+            ).toInt()
         }
     }
 }

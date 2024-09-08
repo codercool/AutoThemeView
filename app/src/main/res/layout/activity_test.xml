@@ -34,6 +34,7 @@
         android:layout_marginTop="100dp"
         android:background="@color/teal_200"
         android:text="normal"
+        android:hint="dddd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,5 +74,14 @@
         android:padding="5dp"
         android:src="@color/color_red"
         app:theme_darkSrc="@mipmap/ic_launcher"/>
+
+    <com.codercool.autothemeview.view.ThemeButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

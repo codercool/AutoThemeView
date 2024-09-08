@@ -11,11 +11,22 @@ open class ThemeViewParams {
     var textDarkColor: ColorStateList? = null
     var lightTextColor: ColorStateList? = null
 
+    var textHintDarkColor: ColorStateList? = null
+    var textHintLightColor: ColorStateList? = null
+
     var bgLightColor: ColorStateList? = null
     var bgDarColor: ColorStateList? = null
 
     var lightImgSrc:Drawable? = null
     var darkImgSrc:Drawable? = null
+
+    var borderWith = 0
+    var borderLightColor: ColorStateList? = null
+    var borderDarkColor: ColorStateList? = null
+
+    var rippleEnable = false
+    var rippleLightColor: ColorStateList? = null
+    var rippleDarkColor: ColorStateList? = null
 
     var radius: Int = 0
     var radiusTopLeft = 0
@@ -23,12 +34,4 @@ open class ThemeViewParams {
     var radiusBottomLeft = 0
     var radiusBottomRight = 0
     var isRadiusAdjustBounds = false
-
-    var borderWith = 0
-    var borderLightColor: ColorStateList? = null
-    var borderDarkColor: ColorStateList? = null
-
-    var rippleLightColor: ColorStateList? = null
-    var rippleDarkColor: ColorStateList? = null
-    var rippleEnable = false
 }

@@ -13,11 +13,16 @@ class ThemeTextViewHelper(private val view: TextView) : ThemeViewHelper(view) {
 
     override fun getStyleable(): IntArray = R.styleable.ThemeTextView
 
-    override fun initParams(typedArray: TypedArray,defaultParams:ThemeViewParams) {
-        themeViewParams.textDarkColor = typedArray.getColorStateList(R.styleable.ThemeTextView_theme_textDarkColor)
-            ?: defaultParams.textDarkColor
-
+    override fun initParams(typedArray: TypedArray, defaultParams: ThemeViewParams) {
+        themeViewParams.textDarkColor =
+            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_textDarkColor)
+                ?: defaultParams.textDarkColor
         themeViewParams.lightTextColor = view.textColors
+
+        themeViewParams.textHintDarkColor =
+            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_textHintDarkColor)
+                ?: defaultParams.textHintDarkColor
+        themeViewParams.textHintLightColor = view.hintTextColors
     }
 
     override fun applyThemeColor() {
@@ -26,10 +31,16 @@ class ThemeTextViewHelper(private val view: TextView) : ThemeViewHelper(view) {
     }
 
     private fun applyTextThemeColor() {
-        if (currentIsDarkModel && themeViewParams.textDarkColor != null && themeViewParams.textDarkColor != view.textColors) {
-            view.setTextColor(themeViewParams.textDarkColor)
-        } else if (themeViewParams.lightTextColor != null && themeViewParams.lightTextColor != view.textColors) {
-            view.setTextColor(themeViewParams.lightTextColor)
+        if (currentIsDarkModel) {
+            if (themeViewParams.textDarkColor != null && themeViewParams.textDarkColor != view.textColors)
+                view.setTextColor(themeViewParams.textDarkColor)
+            if (themeViewParams.textHintDarkColor != null && themeViewParams.textHintDarkColor != view.hintTextColors)
+                view.setHintTextColor(themeViewParams.textHintDarkColor)
+        } else {
+            if (themeViewParams.lightTextColor != null && themeViewParams.lightTextColor != view.textColors)
+                view.setTextColor(themeViewParams.lightTextColor)
+            if (themeViewParams.textHintLightColor != null && themeViewParams.textHintLightColor != view.hintTextColors)
+                view.setHintTextColor(themeViewParams.textHintLightColor)
         }
     }
 }

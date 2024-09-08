@@ -11,7 +11,7 @@ import com.codercool.autothemeview.demo.R
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        val params = AutoThemeManager.Builder(this)
+        val defaultParams = AutoThemeManager.Builder(this)
             .setTextDarkColor(R.color.white)
             /*.setBGLightColor(R.color.teal_700)
             .setBGDarkColor(R.color.color_blue_bg_normal)*/
@@ -26,6 +26,6 @@ class MyApplication : Application() {
             .setRippleDarkColorColor(R.color.teal_200)
             .setRippleEnable(true)
             .build()
-        AutoThemeManager.setDefaultParams(params)
+        AutoThemeManager.setDefaultParams(defaultParams)
     }
 }
