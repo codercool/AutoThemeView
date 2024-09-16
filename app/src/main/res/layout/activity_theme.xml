@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.codercool.autothemeview.view.ThemeConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    app:theme_backgroundColor="@color/color_gray"
+    app:theme_backgroundDarkColor="@color/color_black14"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include layout="@layout/layout_title_bar"
+        android:id="@+id/layout_title_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <com.codercool.autothemeview.view.ThemeTextView
+        app:layout_constraintTop_toBottomOf="@+id/layout_title_bar"
         android:id="@+id/ttv_test"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -13,7 +22,6 @@
         android:text="test"
         android:textColor="@color/color_blue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:theme_backgroundColor="@color/teal_200"
         app:theme_backgroundDarkColor="@color/teal_200"
         app:theme_borderColor="@color/design_default_color_primary"
@@ -33,7 +41,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="100dp"
         android:background="@color/teal_200"
-        android:text="normal"
+        android:text="normal4"
         android:hint="dddd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -84,4 +92,4 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.codercool.autothemeview.view.ThemeConstraintLayout>

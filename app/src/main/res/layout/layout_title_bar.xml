@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.codercool.autothemeview.view.ThemeFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.codercool.autothemeview.view.ThemeImageView
+            android:id="@+id/iv_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_back"
+            app:theme_darkSrc="@drawable/ic_back_dark"
+            android:layout_marginStart="12dp" />
+
+        <com.codercool.autothemeview.view.ThemeTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:theme_textDarkColor="@color/white"
+            tools:text="标题" />
+
+        <com.codercool.autothemeview.view.ThemeLinearlayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            app:theme_backgroundColor="@color/color_divider"
+            app:theme_backgroundDarkColor="@color/color_divider"
+            />
+    </FrameLayout>
+
+</com.codercool.autothemeview.view.ThemeFrameLayout>

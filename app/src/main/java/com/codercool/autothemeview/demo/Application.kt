@@ -12,9 +12,9 @@ class MyApplication : Application() {
         super.onCreate()
         val defaultParams = AutoThemeManager.Builder(this)
             .setTextDarkColor(R.color.white)
-            .setBGColor(R.color.teal_700, R.color.color_blue_bg_normal)
+            /*.setBGColor(R.color.teal_700, R.color.color_blue_bg_normal)
             .setBorderColor(R.color.purple_200, R.color.purple_200)
-            .setBorderWidth(3f)
+            .setBorderWidth(3f)*/
             .setIsRadiusAdjustBounds(true)
             /*.setRadius(40f)
             .setRadiusBottomLeft(20f)
