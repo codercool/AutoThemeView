@@ -102,22 +102,14 @@ object AutoThemeManager {
             return this
         }
 
-        fun setBorderLightColor(borderLightColorRes: Int): Builder {
+        fun setBorderColor(borderLightColorRes: Int, borderDarkColorRes: Int): Builder {
             params.borderLightColor = context.getColorStateList(borderLightColorRes)
-            return this
-        }
-
-        fun setBorderDarkColor(borderDarkColorRes: Int): Builder {
             params.borderDarkColor = context.getColorStateList(borderDarkColorRes)
             return this
         }
 
-        fun setRippleLightColor(rippleLightColorRes: Int): Builder {
+        fun setRippleColor(rippleLightColorRes: Int, rippleDarkColorRes: Int): Builder {
             params.rippleLightColor = context.getColorStateList(rippleLightColorRes)
-            return this
-        }
-
-        fun setRippleDarkColorColor(rippleDarkColorRes: Int): Builder {
             params.rippleDarkColor = context.getColorStateList(rippleDarkColorRes)
             return this
         }
@@ -129,9 +121,7 @@ object AutoThemeManager {
 
         private fun applyDimension(sizeDP: Float): Int {
             return TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                sizeDP,
-                context.resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP, sizeDP, context.resources.displayMetrics
             ).toInt()
         }
     }
