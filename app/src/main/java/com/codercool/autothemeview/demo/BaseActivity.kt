@@ -24,7 +24,7 @@ open class BaseActivity: AppCompatActivity() {
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         // 设置状态栏为亮色或暗色模式
         insetsController.run {
-            if (isAppearanceLightNavigationBars == AutoThemeManager.isDarkModel()) isAppearanceLightStatusBars = AutoThemeManager.isDarkModel().not()
+            if (isAppearanceLightStatusBars != AutoThemeManager.isDarkModel().not()) isAppearanceLightStatusBars = AutoThemeManager.isDarkModel().not()
         }
     }
 }
