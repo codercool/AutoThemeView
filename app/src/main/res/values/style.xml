@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomRadioButton">
+        <attr name="theme_backgroundColor" />
+        <attr name="theme_backgroundDarkColor" />
+        <attr name="theme_rippleColor" />
+        <attr name="theme_rippleDarkColor" />
+        <attr name="theme_rippleEnable" />
+        <attr name="theme_radius" />
+        <attr name="theme_radiusTopLeft" />
+        <attr name="theme_radiusTopRight" />
+        <attr name="theme_radiusBottomLeft" />
+        <attr name="theme_radiusBottomRight" />
+        <attr name="theme_isRadiusAdjustBounds" />
+        <attr name="theme_borderWidth" />
+        <attr name="theme_borderColor" />
+        <attr name="theme_borderDarkColor" />
+        <!--需要基于CustomRadioButton的属性扩展-->
+        <attr name="theme_textDarkColor" />
+    </declare-styleable>
+
+    <style name="tipsTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_text_gray</item>
+        <item name="android:layout_marginStart">16dp</item>
+    </style>
+</resources>

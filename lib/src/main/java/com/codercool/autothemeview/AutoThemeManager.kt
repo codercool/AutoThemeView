@@ -1,7 +1,10 @@
 package com.codercool.autothemeview
 
+import android.app.Activity
 import android.content.Context
 import android.util.TypedValue
+import android.view.View
+import androidx.core.view.isVisible
 
 object AutoThemeManager {
 
@@ -15,6 +18,18 @@ object AutoThemeManager {
 
     fun setDarkModel(isDark: Boolean) {
         isDakModel = isDark
+    }
+
+    fun refreshCurrentPageTheme(activity: Activity) {
+        refreshCurrentPageTheme(activity.window.decorView)
+    }
+
+    fun refreshCurrentPageTheme(view: View) {
+        // 通过更改view的可见状态，引起view的主题更新
+        view.rootView.run {
+            isVisible = false
+            isVisible = true
+        }
     }
 
     fun setDefaultParams(defaultParams: ThemeViewParams) {

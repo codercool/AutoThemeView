@@ -3,3 +3,6 @@
 
 // gradle  
 `com.github.codercool:AutoThemeView:1.0.3`
+
+# TODO
+ThemeImageView增加对圆角图片的支持

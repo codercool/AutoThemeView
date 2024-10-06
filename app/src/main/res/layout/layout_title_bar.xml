@@ -8,7 +8,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         >
 
         <com.codercool.autothemeview.view.ThemeImageView
@@ -31,7 +31,7 @@
             app:theme_textDarkColor="@color/white"
             tools:text="标题" />
 
-        <com.codercool.autothemeview.view.ThemeLinearlayout
+        <com.codercool.autothemeview.view.ThemeView
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom"

@@ -1,95 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.codercool.autothemeview.view.ThemeConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.codercool.autothemeview.view.ThemeLinearlayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:theme_backgroundColor="@color/color_gray"
-    app:theme_backgroundDarkColor="@color/color_black14"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:theme_backgroundDarkColor="@color/color_black14">
 
-    <include layout="@layout/layout_title_bar"
+    <include
         android:id="@+id/layout_title_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        layout="@layout/layout_title_bar" />
+
+    <RadioGroup
+        android:id="@+id/rg_theme_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <com.codercool.autothemeview.demo.CustomRadioButton
+            android:id="@+id/rb_theme_state_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日间"
+            android:textColor="@color/black"
+            app:theme_textDarkColor="@color/white" />
+
+        <com.codercool.autothemeview.demo.CustomRadioButton
+            android:id="@+id/rb_theme_state_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="夜间"
+            android:textColor="@color/black"
+            app:theme_textDarkColor="@color/white" />
+    </RadioGroup>
+
+    <TextView
+        style="@style/tipsTextStyle"
+        android:layout_marginTop="20dp"
+        android:text="ThemeTextView:" />
 
     <com.codercool.autothemeview.view.ThemeTextView
-        app:layout_constraintTop_toBottomOf="@+id/layout_title_bar"
-        android:id="@+id/ttv_test"
+        android:id="@+id/ttv_text"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:text="test"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="带边框和背景色以及点击水波纹的TextView"
         android:textColor="@color/color_blue"
-        app:layout_constraintStart_toStartOf="parent"
-        app:theme_backgroundColor="@color/teal_200"
-        app:theme_backgroundDarkColor="@color/teal_200"
-        app:theme_borderColor="@color/design_default_color_primary"
-        app:theme_borderDarkColor="@color/design_default_color_primary_dark"
-        app:theme_borderWidth="3dp"
+        android:textSize="14dp"
+        app:theme_backgroundColor="@color/color_light_blue"
+        app:theme_backgroundDarkColor="@color/color_gray_bg"
+        app:theme_borderColor="@color/color_blue"
+        app:theme_borderDarkColor="@color/white"
+        app:theme_borderWidth="1dp"
         app:theme_radius="40dp"
         app:theme_radiusBottomLeft="30dp"
         app:theme_radiusTopLeft="30dp"
         app:theme_radiusTopRight="30dp"
-        app:theme_rippleColor="@color/color_red"
-        app:theme_rippleDarkColor="@color/color_blue_bg_normal"
-        app:theme_textDarkColor="@color/color_red" />
+        app:theme_rippleColor="@color/color_blue"
+        app:theme_rippleDarkColor="@color/color_ripple_dark"
+        app:theme_textDarkColor="@color/white" />
 
     <TextView
-        android:id="@+id/tv_normal"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:background="@color/teal_200"
-        android:text="normal4"
-        android:hint="dddd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.codercool.autothemeview.view.ThemeTextView
-        android:id="@+id/tv_visble"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:text="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:theme_textDarkColor="@color/color_red" />
+        style="@style/tipsTextStyle"
+        android:layout_marginTop="20dp"
+        android:text="ThemeLinearlayout:" />
 
     <com.codercool.autothemeview.view.ThemeLinearlayout
-        android:id="@+id/ll_theme"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_visble"
-        app:layout_constraintStart_toStartOf="parent"
-        app:theme_backgroundColor="@color/color_red"
-        app:theme_backgroundDarkColor="@color/color_blue_bg_disabled"
-        app:theme_radius="40dp"
-        >
-        <TextView
+        android:id="@+id/ll_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        app:theme_backgroundColor="@color/white"
+        app:theme_backgroundDarkColor="@color/black"
+        app:theme_borderColor="@color/color_gray_9"
+        app:theme_borderDarkColor="@color/color_gray_9"
+        app:theme_borderWidth="1dp"
+        app:theme_radius="12dp">
+
+        <com.codercool.autothemeview.view.ThemeTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ThemeLinearlayout"
-            />
+            android:text="第一行文本"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:theme_textDarkColor="@color/white" />
+
+        <com.codercool.autothemeview.view.ThemeTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="第二行文本"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:theme_textDarkColor="@color/white" />
     </com.codercool.autothemeview.view.ThemeLinearlayout>
 
+    <TextView
+        style="@style/tipsTextStyle"
+        android:layout_marginTop="20dp"
+        android:text="ThemeEditText:" />
+
+    <com.codercool.autothemeview.view.ThemeEditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
+        android:hint="请输入文字"
+        android:textColor="@color/black"
+        android:textColorHint="@color/color_blue"
+        android:textSize="14dp"
+        app:theme_textDarkColor="@color/white"
+        app:theme_textHintDarkColor="@color/color_blue_bg_normal" />
+
+    <TextView
+        style="@style/tipsTextStyle"
+        android:layout_marginTop="20dp"
+        android:text="ThemeImageView:" />
+
     <com.codercool.autothemeview.view.ThemeImageView
+        android:id="@+id/iv_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:layout_constraintTop_toBottomOf="@+id/ll_theme"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
         android:padding="5dp"
-        android:src="@color/color_red"
-        app:theme_darkSrc="@mipmap/ic_launcher"/>
+        android:src="@drawable/img_day_light"
+        app:theme_darkSrc="@drawable/img_day_light" />
+
+    <TextView
+        style="@style/tipsTextStyle"
+        android:layout_marginTop="20dp"
+        android:text="ThemeButton:" />
 
     <com.codercool.autothemeview.view.ThemeButton
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="5dp"
         android:text="button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:textColor="@color/black"
+        app:theme_backgroundColor="@color/white"
+        app:theme_backgroundDarkColor="@color/black"
+        app:theme_isRadiusAdjustBounds="true"
+        app:theme_textDarkColor="@color/white" />
 
-</com.codercool.autothemeview.view.ThemeConstraintLayout>
+</com.codercool.autothemeview.view.ThemeLinearlayout>
