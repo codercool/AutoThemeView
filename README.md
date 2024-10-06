@@ -4,7 +4,7 @@
 #### 项目演示
 |日间、夜间模式切换|切换模式后返回上一页|
 |:---:|:---:|
-|![](https://github.com/user-attachments/assets/1b4a06a2-6d61-4740-8d91-4a9dc2a7391e)|![](https://github.com/user-attachments/assets/76d61f32-d26f-40c9-9bec-6da38e039589)|
+|![](https://github.com/user-attachments/assets/85ef77d0-41b1-4734-a7c0-b8d3052f22c0)|![](https://github.com/user-attachments/assets/76d61f32-d26f-40c9-9bec-6da38e039589)|
 |点击水波纹效果||
 |![飞书20241006-212949](https://github.com/user-attachments/assets/5b7df1c6-b189-4fa7-949e-b4a82155204e)||
 
