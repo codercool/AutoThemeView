@@ -4,50 +4,41 @@ plugins {
 }
 
 android {
-    namespace 'com.codercool.autothemeview.demo'
-    compileSdk 33
-
     defaultConfig {
         applicationId "com.codercool.autothemeview.demo"
-        minSdk 24
-        targetSdk 33
         versionCode 1
-        versionName "1.0"
+        versionName "1"
+
+        minSdkVersion 21 // because of testLib Moka
+        compileSdk defaultCompileSdkVersion
+        targetSdkVersion defaultTargetSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    signingConfigs {
-        realease {
-            keyAlias "autotheme"
-            keyPassword "123456"
-            storeFile file("sign.jks")
-            storePassword "123456"
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
+        testInstrumentationRunnerArguments useTestStorageService: 'true'
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig(signingConfigs.realease)
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+
+    buildFeatures {
+        viewBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
+    namespace 'com.codercool.autothemeview.demo'
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation project(':lib')
+    implementation "androidx.core:core-ktx:$core_ktx_vesion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-     implementation project(":lib")
-    //implementation "com.github.codercool:AutoThemeView:Tag"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
 }

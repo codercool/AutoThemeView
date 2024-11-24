@@ -23,7 +23,7 @@ open class BaseActivity: AppCompatActivity() {
     protected fun updateStatusBarModel() {
         val insetsController = WindowCompat.getInsetsController(window, window.decorView)
         // 设置状态栏为亮色或暗色模式
-        insetsController.run {
+        insetsController?.run {
             if (isAppearanceLightStatusBars != AutoThemeManager.isDarkModel().not()) isAppearanceLightStatusBars = AutoThemeManager.isDarkModel().not()
         }
     }

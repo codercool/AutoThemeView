@@ -5,27 +5,28 @@ plugins {
 }
 
 android {
-    namespace 'com.codercool.autothemeview'
-    compileSdk 33
-
     defaultConfig {
-        minSdk 24
-        targetSdk 33
+        minSdkVersion 16
+        aarMetadata {
+            minCompileSdk = 28
+        }
+        testFixtures {
+            enable = true
+        }
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        compileSdk defaultCompileSdkVersion
+        targetSdkVersion defaultTargetSdkVersion
+        buildConfigField "String", 'VERSION', "\"" + versionName + "\""
     }
 
     buildTypes {
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    namespace 'com.codercool.autothemeview'
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -33,22 +34,17 @@ android {
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.core:core-ktx:$core_ktx_vesion"
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            afterEvaluate {
                 from components.release
-                groupId = 'com.codercool.autothemeview'
-                artifactId = 'autothemeview'
-                version = '1.0.0'
             }
         }
     }
