@@ -2,7 +2,6 @@ package com.codercool.autothemeview.helper
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.GradientDrawable
@@ -26,84 +25,81 @@ open class ThemeViewHelper(private val view: View) {
     private val noTransparentColor =
         ColorStateList.valueOf(Color.parseColor("#01000000")) // 非全透明的颜色
 
-    open fun getStyleable(): IntArray = R.styleable.ThemeView
-
     fun initParams(context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0) {
         val typedArray = context.obtainStyledAttributes(
-            attrs, getStyleable(), defStyleAttr, 0
+            attrs, R.styleable.ThemeView, defStyleAttr, 0
         )
 
         val defaultParams = AutoThemeManager.getDefaultParams()
 
         themeViewParams.bgLightColor =
-            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundColor)
+            typedArray.getColorStateList(R.styleable.ThemeView_theme_backgroundColor)
                 ?: defaultParams.bgLightColor
 
         themeViewParams.bgDarColor =
-            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_backgroundDarkColor)
+            typedArray.getColorStateList(R.styleable.ThemeView_theme_backgroundDarkColor)
                 ?: defaultParams.bgDarColor
 
         themeViewParams.rippleLightColor =
-            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleColor)
+            typedArray.getColorStateList(R.styleable.ThemeView_theme_rippleColor)
                 ?: defaultParams.rippleLightColor
 
         themeViewParams.rippleDarkColor =
-            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_rippleDarkColor)
+            typedArray.getColorStateList(R.styleable.ThemeView_theme_rippleDarkColor)
                 ?: defaultParams.rippleDarkColor
 
         themeViewParams.radius = typedArray.getDimensionPixelSize(
-            R.styleable.ThemeTextView_theme_radius, defaultParams.radius
+            R.styleable.ThemeView_theme_radius, defaultParams.radius
         )
 
         themeViewParams.radiusTopLeft =
             typedArray.getDimensionPixelSize(
-                R.styleable.ThemeTextView_theme_radiusTopLeft, defaultParams.radiusTopLeft
+                R.styleable.ThemeView_theme_radiusTopLeft, defaultParams.radiusTopLeft
             )
 
         themeViewParams.radiusTopRight =
             typedArray.getDimensionPixelSize(
-                R.styleable.ThemeTextView_theme_radiusTopRight, defaultParams.radiusTopRight
+                R.styleable.ThemeView_theme_radiusTopRight, defaultParams.radiusTopRight
             )
 
         themeViewParams.radiusBottomLeft =
             typedArray.getDimensionPixelSize(
-                R.styleable.ThemeTextView_theme_radiusBottomLeft, defaultParams.radiusBottomLeft
+                R.styleable.ThemeView_theme_radiusBottomLeft, defaultParams.radiusBottomLeft
             )
 
         themeViewParams.radiusBottomRight =
             typedArray.getDimensionPixelSize(
-                R.styleable.ThemeTextView_theme_radiusBottomRight, defaultParams.radiusBottomRight
+                R.styleable.ThemeView_theme_radiusBottomRight, defaultParams.radiusBottomRight
             )
 
         themeViewParams.borderWith =
             typedArray.getDimensionPixelSize(
-                R.styleable.ThemeTextView_theme_borderWidth, defaultParams.borderWith
+                R.styleable.ThemeView_theme_borderWidth, defaultParams.borderWith
             )
 
         themeViewParams.borderLightColor =
-            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_borderColor)
+            typedArray.getColorStateList(R.styleable.ThemeView_theme_borderColor)
                 ?: defaultParams.borderLightColor
 
         themeViewParams.borderDarkColor =
-            typedArray.getColorStateList(R.styleable.ThemeTextView_theme_borderDarkColor)
+            typedArray.getColorStateList(R.styleable.ThemeView_theme_borderDarkColor)
                 ?: defaultParams.borderDarkColor
 
         themeViewParams.isRadiusAdjustBounds =
             typedArray.getBoolean(
-                R.styleable.ThemeTextView_theme_isRadiusAdjustBounds,
+                R.styleable.ThemeView_theme_isRadiusAdjustBounds,
                 defaultParams.isRadiusAdjustBounds
             )
 
         themeViewParams.rippleEnable = typedArray.getBoolean(
-            R.styleable.ThemeTextView_theme_rippleEnable, defaultParams.rippleEnable
+            R.styleable.ThemeView_theme_rippleEnable, defaultParams.rippleEnable
         )
-        initParams(typedArray, defaultParams)
         typedArray.recycle()
+        initParams(context, attrs, defStyleAttr, defaultParams)
         applyThemeColor()
     }
 
-    open fun initParams(typedArray: TypedArray, defaultParams: ThemeViewParams) {}
-
+    open fun initParams(context: Context, attrs: AttributeSet?, defStyleAttr: Int,defaultParams: ThemeViewParams) {}
 
     open fun applyThemeColor() {
         currentIsDarkModel = AutoThemeManager.isDarkModel()

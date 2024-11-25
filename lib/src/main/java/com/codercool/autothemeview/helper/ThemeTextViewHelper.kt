@@ -1,6 +1,7 @@
 package com.codercool.autothemeview.helper
 
-import android.content.res.TypedArray
+import android.content.Context
+import android.util.AttributeSet
 import android.widget.TextView
 import com.codercool.autothemeview.R
 import com.codercool.autothemeview.ThemeViewParams
@@ -11,9 +12,12 @@ import com.codercool.autothemeview.ThemeViewParams
  */
 class ThemeTextViewHelper(private val view: TextView) : ThemeViewHelper(view) {
 
-    override fun getStyleable(): IntArray = R.styleable.ThemeTextView
-
-    override fun initParams(typedArray: TypedArray, defaultParams: ThemeViewParams) {
+    override fun initParams(
+        context: Context, attrs: AttributeSet?, defStyleAttr: Int, defaultParams: ThemeViewParams
+    ) {
+        val typedArray = context.obtainStyledAttributes(
+            attrs, R.styleable.ThemeTextView, defStyleAttr, 0
+        )
         themeViewParams.textDarkColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_textDarkColor)
                 ?: defaultParams.textDarkColor
@@ -22,7 +26,9 @@ class ThemeTextViewHelper(private val view: TextView) : ThemeViewHelper(view) {
         themeViewParams.textHintDarkColor =
             typedArray.getColorStateList(R.styleable.ThemeTextView_theme_textHintDarkColor)
                 ?: defaultParams.textHintDarkColor
+
         themeViewParams.textHintLightColor = view.hintTextColors
+        typedArray.recycle()
     }
 
     override fun applyThemeColor() {

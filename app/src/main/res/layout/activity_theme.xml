@@ -133,6 +133,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="5dp"
         android:padding="5dp"
+        app:theme_isRadiusAdjustBounds="true"
         android:src="@drawable/img_day_light"
         app:theme_darkSrc="@drawable/img_day_dark" />
 

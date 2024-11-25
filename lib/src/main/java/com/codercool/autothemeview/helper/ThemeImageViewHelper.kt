@@ -1,6 +1,7 @@
 package com.codercool.autothemeview.helper
 
-import android.content.res.TypedArray
+import android.content.Context
+import android.util.AttributeSet
 import android.widget.ImageView
 import com.codercool.autothemeview.R
 import com.codercool.autothemeview.ThemeViewParams
@@ -11,11 +12,15 @@ import com.codercool.autothemeview.ThemeViewParams
  */
 class ThemeImageViewHelper(private val view: ImageView) : ThemeViewHelper(view) {
 
-    override fun getStyleable(): IntArray = R.styleable.ThemeImageView
-
-    override fun initParams(typedArray: TypedArray,defaultParams:ThemeViewParams) {
+    override fun initParams(
+        context: Context, attrs: AttributeSet?, defStyleAttr: Int, defaultParams: ThemeViewParams
+    ) {
+        val typedArray = context.obtainStyledAttributes(
+            attrs,  R.styleable.ThemeImageView, defStyleAttr, 0
+        )
         themeViewParams.darkImgSrc = typedArray.getDrawable(R.styleable.ThemeImageView_theme_darkSrc)
         themeViewParams.lightImgSrc = view.drawable
+        typedArray.recycle()
     }
 
     override fun applyThemeColor() {
