@@ -4,7 +4,7 @@
     <attr name="theme_backgroundDarkColor" format="color" />
     <attr name="theme_rippleColor" format="color" />
     <attr name="theme_rippleDarkColor" format="color" />
-    <attr name="theme_rippleEnable" format="dimension" />
+    <attr name="theme_rippleEnable" format="boolean" />
     <attr name="theme_radius" format="dimension" />
     <attr name="theme_radiusTopLeft" format="dimension" />
     <attr name="theme_radiusTopRight" format="dimension" />

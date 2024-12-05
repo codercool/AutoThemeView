@@ -9,7 +9,7 @@ android {
         versionCode 1
         versionName "1"
 
-        minSdkVersion 21 // because of testLib Moka
+        minSdkVersion 21
         compileSdk defaultCompileSdkVersion
         targetSdkVersion defaultTargetSdkVersion
 
