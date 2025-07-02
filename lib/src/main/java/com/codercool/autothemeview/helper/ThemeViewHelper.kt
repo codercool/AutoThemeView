@@ -20,7 +20,7 @@ import kotlin.math.min
 open class ThemeViewHelper(private val view: View) {
     protected var currentIsDarkModel = false
 
-    protected val themeViewParams = ThemeViewParams()
+    val themeViewParams = ThemeViewParams()
 
     private val noTransparentColor =
         ColorStateList.valueOf(Color.parseColor("#01000000")) // 非全透明的颜色
@@ -106,7 +106,7 @@ open class ThemeViewHelper(private val view: View) {
         applyBGThemeColor()
     }
 
-    private fun applyBGThemeColor() {
+    fun applyBGThemeColor() {
         val rippleEnable =
             themeViewParams.rippleEnable && (view.isClickable || view.isLongClickable)
         if (rippleEnable.not() && (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null)) return

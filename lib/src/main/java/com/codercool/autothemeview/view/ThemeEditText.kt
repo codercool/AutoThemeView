@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
+import com.codercool.autothemeview.helper.ChangeThemeDelegate
+import com.codercool.autothemeview.helper.IChangeTheme
 import com.codercool.autothemeview.helper.ThemeTextViewHelper
 
 /**
@@ -12,12 +14,13 @@ import com.codercool.autothemeview.helper.ThemeTextViewHelper
  */
 class ThemeEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet?, defStyleAttr: Int = android.R.attr.editTextStyle
-) : AppCompatEditText(context, attrs, defStyleAttr) {
+) : AppCompatEditText(context, attrs, defStyleAttr), IChangeTheme by ChangeThemeDelegate() {
 
     private var themeViewHelper = ThemeTextViewHelper(this)
 
     init {
         themeViewHelper.initParams(context, attrs, defStyleAttr)
+        setThemeViewHelper(themeViewHelper)
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

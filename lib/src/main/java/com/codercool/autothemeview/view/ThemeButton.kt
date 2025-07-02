@@ -5,6 +5,8 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.R
 import androidx.appcompat.widget.AppCompatButton
+import com.codercool.autothemeview.helper.ChangeThemeDelegate
+import com.codercool.autothemeview.helper.IChangeTheme
 import com.codercool.autothemeview.helper.ThemeTextViewHelper
 
 /**
@@ -13,12 +15,13 @@ import com.codercool.autothemeview.helper.ThemeTextViewHelper
  */
 class ThemeButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet?, defStyleAttr: Int = R.attr.buttonStyle
-) : AppCompatButton(context, attrs, defStyleAttr) {
+) : AppCompatButton(context, attrs, defStyleAttr), IChangeTheme by ChangeThemeDelegate() {
 
     private var themeViewHelper = ThemeTextViewHelper(this)
 
     init {
         themeViewHelper.initParams(context, attrs, defStyleAttr)
+        setThemeViewHelper(themeViewHelper)
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

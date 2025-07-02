@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
+import com.codercool.autothemeview.helper.ChangeThemeDelegate
+import com.codercool.autothemeview.helper.IChangeTheme
 import com.codercool.autothemeview.helper.ThemeImageViewHelper
 
 /**
@@ -12,12 +14,13 @@ import com.codercool.autothemeview.helper.ThemeImageViewHelper
  */
 class ThemeImageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr) {
+) : AppCompatImageView(context, attrs, defStyleAttr), IChangeTheme by ChangeThemeDelegate() {
 
     private var themeViewHelper = ThemeImageViewHelper(this)
 
     init {
         themeViewHelper.initParams(context, attrs, defStyleAttr)
+        setThemeViewHelper(themeViewHelper)
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

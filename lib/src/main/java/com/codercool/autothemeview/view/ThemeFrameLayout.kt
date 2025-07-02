@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import com.codercool.autothemeview.helper.ChangeThemeDelegate
+import com.codercool.autothemeview.helper.IChangeTheme
 import com.codercool.autothemeview.helper.ThemeViewHelper
 
 /**
@@ -12,12 +14,13 @@ import com.codercool.autothemeview.helper.ThemeViewHelper
  */
 class ThemeFrameLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0, defStyleRes: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
+) : FrameLayout(context, attrs, defStyleAttr, defStyleRes), IChangeTheme by ChangeThemeDelegate() {
 
     private var themeViewHelper = ThemeViewHelper(this)
 
     init {
         themeViewHelper.initParams(context, attrs, defStyleAttr)
+        setThemeViewHelper(themeViewHelper)
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
