@@ -11,7 +11,7 @@
 ## 简单用例
 #### 1.在 build.gradle 中添加依赖
 ```gradle
-com.github.codercool:AutoThemeView:1.0.11
+com.github.codercool:AutoThemeView:1.0.23
 ```
 #### 2.在 Application 中初始化AutoThemeManager
 ```kotlin
