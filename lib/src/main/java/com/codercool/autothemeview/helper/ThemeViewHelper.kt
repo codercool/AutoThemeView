@@ -109,7 +109,7 @@ open class ThemeViewHelper(private val view: View) {
     fun applyBGThemeColor() {
         val rippleEnable =
             themeViewParams.rippleEnable && (view.isClickable || view.isLongClickable)
-        if (rippleEnable.not() && (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null)) return
+        if (rippleEnable.not() && (themeViewParams.bgLightColor == null || themeViewParams.bgDarColor == null) && (themeViewParams.borderDarkColor == null || themeViewParams.borderLightColor == null)) return
 
         val contentDrawable = createContentDrawable()
         view.background =
