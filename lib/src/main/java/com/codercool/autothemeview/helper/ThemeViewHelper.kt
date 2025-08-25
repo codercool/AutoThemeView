@@ -146,10 +146,10 @@ open class ThemeViewHelper(private val view: View) {
                     themeViewParams.radiusTopLeft.toFloat(),
                     themeViewParams.radiusTopRight.toFloat(),
                     themeViewParams.radiusTopRight.toFloat(),
-                    themeViewParams.radiusBottomLeft.toFloat(),
-                    themeViewParams.radiusBottomLeft.toFloat(),
                     themeViewParams.radiusBottomRight.toFloat(),
                     themeViewParams.radiusBottomRight.toFloat(),
+                    themeViewParams.radiusBottomLeft.toFloat(),
+                    themeViewParams.radiusBottomLeft.toFloat(),
                 )
                 themeViewParams.isRadiusAdjustBounds = false
             } else {
