@@ -1,6 +1,8 @@
 package com.codercool.autothemeview.helper
 
 import android.content.res.ColorStateList
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 
 /**
  *  Copyright © 2025/7/2 Hugecore Information Technology (Guangzhou) Co.,Ltd. All rights reserved.
@@ -48,6 +50,35 @@ class ChangeThemeDelegate : IChangeTheme {
         }
     }
 
+    override fun setBackGroundColor(lightColor: Int, darkColor: Int?) {
+        themeViewHelper?.run {
+            themeViewParams.run {
+                bgLightColor = ColorStateList.valueOf(lightColor)
+                bgDarColor = darkColor?.let { ColorStateList.valueOf(it) }
+            }
+            applyBGThemeColor()
+        }
+    }
+
+    override fun setBordColor(lightColor: Int, darkColor: Int?) {
+        themeViewHelper?.run {
+            themeViewParams.run {
+                borderLightColor = ColorStateList.valueOf(lightColor)
+                borderDarkColor = darkColor?.let { ColorStateList.valueOf(it) }
+            }
+            applyBGThemeColor()
+        }
+    }
+
+    override fun setBorderWidth(width: Int) {
+        themeViewHelper?.run {
+            themeViewParams.run {
+                borderWith = width
+            }
+            applyBGThemeColor()
+        }
+    }
+
     override fun setThemeViewHelper(themeViewHelper:ThemeViewHelper) {
         this.themeViewHelper = themeViewHelper
     }
@@ -62,6 +93,12 @@ interface IChangeTheme {
     )
 
     fun setBackGroundColor(lightColor: ColorStateList, darkColor: ColorStateList? = null)
+
+    fun setBackGroundColor(@ColorInt lightColor: Int,@ColorInt darkColor: Int? = null)
+
+    fun setBordColor(@ColorInt lightColor: Int, @ColorInt darkColor: Int? = null)
+
+    fun setBorderWidth(width: Int)
 
     fun setThemeViewHelper(themeViewHelper:ThemeViewHelper)
 }
